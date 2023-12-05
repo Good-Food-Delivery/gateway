@@ -8,3 +8,9 @@ spring:
             - Path=/restaurant/**
           filters:
             - AddResponseHeader=X-Powered-By, Eric Gateway Service
+        - id: user-route
+          uri: ${USER_ROUTE_URI:http://localhost:8081}
+          predicates:
+            - Path=/user/**
+          filters:
+            - AddResponseHeader=X-Powered-By, Eric Gateway Service
