@@ -1,15 +1,24 @@
+server:
+  port: 8079
+
 spring:
   cloud:
     gateway:
       routes:
         - id: restaurant-route
-          uri: ${RESTAURANT_ROUTE_URI:http://localhost:8081}
+          uri: ${RESTAURANT_ROUTE_URI:http://localhost:8080}
           predicates:
             - Path=/restaurant/**
           filters:
             - AddResponseHeader=X-Powered-By, Eric Gateway Service
+        - id: auth-route
+          uri: ${AUTH_ROUTE_URI:http://localhost:8081}
+          predicates:
+            - Path=/auth/**
+          filters:
+            - AddResponseHeader=X-Powered-By, Eric Gateway Service
         - id: user-route
-          uri: ${USER_ROUTE_URI:http://localhost:8081}
+          uri: ${USER_ROUTE_URI:http://localhost:8082}
           predicates:
             - Path=/user/**
           filters:
